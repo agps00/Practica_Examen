@@ -1,1 +1,28 @@
+echo "actualizar paquetes"
+sudo apt update
 
+echo "configurar red"
+
+echo "hacemos copia" 
+sudo cp 00-installer-config.yaml 00-installer-config.yaml.bak 
+
+echo "configuramos ip"
+ sudo nano 00-installer-config.yaml 
+ sudo netplan try 
+ ip a
+ 
+ echo "volvemos actualizar"
+ sudo apt update
+ 
+ echo "instalamos el curl"
+ sudo apt install -y curl
+ 
+ echo "instalamos la aplicacion y sus dependencias"
+ sudo apt-get -install -y cockpit--install-recommends
+ 
+ 
+ echo "configurar firewall"
+ 
+ sudo ufw allow ssh
+ sudo ufw allow 9090/tcp
+ sudo ufw enable
